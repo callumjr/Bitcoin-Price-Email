@@ -2,18 +2,28 @@ const axios = require("axios");
 const nodemailer = require("nodemailer");
 const express = require("express");
 
-async function getData() {
-  const response = await axios.get(
-    "https://api.coingecko.com/api/v3/coins/bitcoin",
-    {}
-  );
-  const data = response.data;
-  const price = data.market_data.current_price.usd;
-  return data;
+//get the price data from the coingecko api
+
+async function getPriceData() {
+  try {
+    const response = await axios.get(
+      "https://api.coingecko.com/api/v3/coins/bitcoin",
+      {}
+    );
+
+    const data = response.data;
+    const price = data.market_data.current_price.usd;
+
+    return price;
+  } catch (error) {
+    throw error;
+  }
 }
 
-getData().then((response) => {
-  const price = response.market_data.current_price.usd;
+//use price data to send email using nodemailer
+
+getPriceData().then((response) => {
+  const price = response;
 
   const transport = nodemailer.createTransport({
     host: "smtp.mailtrap.io",
