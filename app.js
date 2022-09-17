@@ -32,8 +32,8 @@ getPriceData().then((response) => {
     host: "smtp.sendgrid.net",
     port: 587,
     auth: {
-      user: sendgridKey,
-      pass: "42ccafa18b3112",
+      user: "apikey",
+      pass: sendgridKey,
     },
   });
 
