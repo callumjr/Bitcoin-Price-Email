@@ -3,7 +3,8 @@ const nodemailer = require("nodemailer");
 const express = require("express");
 const config = require("./config");
 const sendgridKey = config.MY_API_KEY;
-const testEmail = config.EMAIL;
+const senderEmail = config.SENDER_EMAIL;
+const recieverEmail = config.RECIEVER_EMAIL;
 
 //get the price data from the coingecko api
 
@@ -25,33 +26,42 @@ async function getPriceData() {
 
 //use price data to send email using nodemailer
 
-getPriceData().then((response) => {
-  const price = response;
+const emailFunction = () =>
+  getPriceData().then((response) => {
+    const btcPrice = response;
+    const selectedPrice = 20200;
 
-  const transport = nodemailer.createTransport({
-    host: "smtp.sendgrid.net",
-    port: 587,
-    auth: {
-      user: "apikey",
-      pass: sendgridKey,
-    },
-  });
+    if (btcPrice < selectedPrice) {
+      const transport = nodemailer.createTransport({
+        host: "smtp.sendgrid.net",
+        port: 587,
+        auth: {
+          user: "apikey",
+          pass: sendgridKey,
+        },
+      });
 
-  const message = {
-    from: testEmail,
-    to: testEmail,
-    subject: "Bitcoin Price!",
-    text: `Bitcoin price is currently ${price}, this presents a good buying opportunity.`,
-  };
+      const message = {
+        from: senderEmail,
+        to: recieverEmail,
+        subject: `BTC PRICE BELOW ${selectedPrice}!`,
+        text: `
+        Hello this is a test of my program.
+        Bitcoin price is below your selected price of ${selectedPrice}, and is currently ${btcPrice}. This presents a good buying opportunity.`,
+      };
 
-  transport.sendMail(message, (err, info) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(info);
+      transport.sendMail(message, (err, info) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(info);
+        }
+      });
     }
-  });
-});
 
-//first get the program to work when run
-//then automate the program to run constantly
+    setTimeout(emailFunction, 60000);
+  });
+
+emailFunction();
+
+//1800000
