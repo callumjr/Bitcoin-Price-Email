@@ -1,6 +1,9 @@
 const axios = require("axios");
 const nodemailer = require("nodemailer");
 const express = require("express");
+const config = require("./config");
+const sendgridKey = config.MY_API_KEY;
+const testEmail = config.EMAIL;
 
 //get the price data from the coingecko api
 
@@ -26,17 +29,17 @@ getPriceData().then((response) => {
   const price = response;
 
   const transport = nodemailer.createTransport({
-    host: "smtp.mailtrap.io",
-    port: 2525,
+    host: "smtp.sendgrid.net",
+    port: 587,
     auth: {
-      user: "17676eb50fc4d1",
+      user: sendgridKey,
       pass: "42ccafa18b3112",
     },
   });
 
   const message = {
-    from: "callum.rosier2018@gmail.com",
-    to: "callum.rosier2018@gmail.com",
+    from: testEmail,
+    to: testEmail,
     subject: "Bitcoin Price!",
     text: `Bitcoin price is currently ${price}, this presents a good buying opportunity.`,
   };
