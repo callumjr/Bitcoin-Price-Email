@@ -45,9 +45,7 @@ const emailFunction = () =>
         from: senderEmail,
         to: recieverEmail,
         subject: `BTC PRICE BELOW ${selectedPrice}!`,
-        text: `
-        Hello this is a test of my program.
-        Bitcoin price is below your selected price of ${selectedPrice}, and is currently ${btcPrice}. This presents a good buying opportunity.`,
+        text: `Bitcoin price is below your selected price of ${selectedPrice}, and is currently ${btcPrice}. This presents a good buying opportunity.`,
       };
 
       transport.sendMail(message, (err, info) => {
@@ -64,4 +62,5 @@ const emailFunction = () =>
 
 emailFunction();
 
-//1800000
+//check if email already sent you dont want to clutter inbox
+//send a weekly report of the price
