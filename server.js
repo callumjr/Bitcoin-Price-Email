@@ -2,8 +2,10 @@ const express = require("express");
 
 const app = express();
 
-app.get("/test", (req, res) => {
-  res.sendFile("index.html", { root: __dirname });
+app.use(express.static(__dirname + "/static"));
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
 });
 
 app.listen(3000, () => {

@@ -37,20 +37,20 @@ body {
   margin-bottom: 2rem;
 }
 
-.interactive-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .interactive-section {
-  width: 75%;
   display: flex;
-  background-color: rgb(7, 105, 141);
-  border-radius: 5px;
   padding: 1rem;
 }
 .interactive-section p {
   font-size: 1.3rem;
   font-weight: 200;
-}/*# sourceMappingURL=style.css.map */
+}
+.interactive-section > * {
+  margin-right: 3rem;
+}
+
+.email-input,
+.price-input,
+.alert-button {
+  height: 2rem;
+} /*# sourceMappingURL=style.css.map */
