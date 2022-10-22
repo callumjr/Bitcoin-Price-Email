@@ -4,7 +4,6 @@ const express = require("express");
 const config = require("./config");
 const sendgridKey = config.MY_API_KEY;
 const senderEmail = config.SENDER_EMAIL;
-const recieverEmail = config.RECIEVER_EMAIL;
 
 //get the price data from the coingecko api
 
@@ -26,10 +25,10 @@ async function getPriceData() {
 
 //use price data to send email using nodemailer
 
-const emailFunction = () =>
+const emailFunction = (price, recieverEmail) => {
   getPriceData().then((response) => {
     const btcPrice = response;
-    const selectedPrice = 20200;
+    const selectedPrice = price;
 
     if (btcPrice < selectedPrice) {
       const transport = nodemailer.createTransport({
@@ -59,6 +58,12 @@ const emailFunction = () =>
 
     setTimeout(emailFunction, 60000);
   });
+};
+
+module.exports = {
+  getPriceData,
+  emailFunction,
+};
 
 //TO SEND EMAIL RUN EMAIL FUNCTION
 
