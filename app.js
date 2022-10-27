@@ -60,8 +60,6 @@ const emailFunction = (price, recieverEmail) => {
   });
 };
 
-//test
-
 module.exports = {
   getPriceData,
   emailFunction,

@@ -18,11 +18,13 @@ body {
 }
 
 .main-box {
-  width: 50%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  background-color: rgb(25, 40, 65);
+  background-color: rgb(47, 43, 37);
 }
 
 .main-heading {
@@ -42,15 +44,51 @@ body {
   padding: 1rem;
 }
 .interactive-section p {
-  font-size: 1.3rem;
+  font-size: 1.7rem;
   font-weight: 200;
 }
 .interactive-section > * {
-  margin-right: 3rem;
+  margin-right: 1rem;
+}
+.interactive-section .crypto-dropdown {
+  border: 2px solid rgb(255, 158, 2);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  position: relative;
+  bottom: 0.25rem;
+}
+.interactive-section .crypto-dropdown .btc-img {
+  width: 2rem;
+}
+.interactive-section .crypto-dropdown > * {
+  margin-right: 0.5rem;
+}
+.interactive-section .crypto-dropdown-content {
+  position: absolute;
+  top: 3.75rem;
+  right: 0.25rem;
+  height: 9rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: rgb(47, 43, 37);
+  list-style: none;
+  overflow-y: scroll;
+}
+.interactive-section .crypto-dropdown-content .crypto-li {
+  display: flex;
+  margin: 1rem;
+  align-items: center;
+}
+.interactive-section .crypto-dropdown-content .crypto-li > * {
+  margin-right: 1rem;
+  font-weight: 200;
 }
 
 .email-input,
 .price-input,
 .alert-button {
   height: 2rem;
-} /*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

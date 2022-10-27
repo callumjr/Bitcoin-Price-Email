@@ -18,9 +18,9 @@ body {
 }
 
 .main-box {
-  width: 50%;
+  width: fit-content;
   height: fit-content;
-  background-color: rgb(25, 40, 65);
+  background-color: rgb(47, 43, 37);
 }
 
 .main-heading {
@@ -40,12 +40,52 @@ body {
   padding: 1rem;
 
   & p {
-    font-size: 1.3rem;
+    font-size: 1.7rem;
     font-weight: 200;
   }
 
   & > * {
-    margin-right: 3rem;
+    margin-right: 1rem;
+  }
+
+  .crypto-dropdown {
+    border: 2px solid rgb(255, 158, 2);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    position: relative;
+    bottom: 0.25rem;
+
+    .btc-img {
+      width: 2rem;
+    }
+
+    & > * {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .crypto-dropdown-content {
+    position: absolute;
+    top: 3.75rem;
+    right: 0.25rem;
+    height: 9rem;
+    width: fit-content;
+    background-color: rgb(47, 43, 37);
+    list-style: none;
+    overflow-y: scroll;
+
+    .crypto-li {
+      display: flex;
+      margin: 1rem;
+      align-items: center;
+
+      & > * {
+        margin-right: 1rem;
+        font-weight: 200;
+      }
+    }
   }
 }
 

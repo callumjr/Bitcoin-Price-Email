@@ -22,9 +22,15 @@
 
         <div class="interactive-wrapper">
           <div class="interactive-section">
+            <p>My email is</p>
             <input class="email-input" type="email" />
             <p>I would like to be sent an email when</p>
             <!-- dropdown menu (crypto) -->
+            <div class="crypto-dropdown">
+              <img class="btc-img" src="/img/Bitcoin.svg.webp" alt="" />
+              <h3>Bitcoin</h3>
+              <ul class="crypto-dropdown-content"></ul>
+            </div>
             <p>goes</p>
             <!-- dropdown menu (above or below) -->
             <input class="price-input" type="text" />
@@ -35,6 +41,7 @@
       </div>
     </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <script src="/client.js"></script>
   </body>
 </html>
