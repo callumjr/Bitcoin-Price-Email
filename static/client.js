@@ -1,6 +1,7 @@
 const alertBtn = document.querySelector(".alert-button");
 const emailInput = document.querySelector(".email-input");
 const priceInput = document.querySelector(".price-input");
+const dropdownCoin = document.querySelector(".crypto-dropdown");
 const dropdownContentDiv = document.querySelector(".crypto-dropdown-content");
 
 async function getCryptoList() {
@@ -30,6 +31,16 @@ getCryptoList().then((response) => {
         <h2>(${v.symbol.toUpperCase()})</h2>
       </li>
   `;
+  });
+
+  dropdownCoin.addEventListener("click", () => {
+    dropdownContentDiv.style.visibility = "visible";
+  });
+
+  document.querySelectorAll(".crypto-li").forEach((v) => {
+    v.addEventListener("click", () => {
+      console.log("click");
+    });
   });
 });
 
