@@ -34,12 +34,30 @@ getCryptoList().then((response) => {
   });
 
   dropdownCoin.addEventListener("click", () => {
-    dropdownContentDiv.style.visibility = "visible";
+    if (dropdownContentDiv.style.visibility !== "visible") {
+      dropdownContentDiv.style.visibility = "visible";
+    } else {
+      dropdownContentDiv.style.visibility = "hidden";
+    }
   });
 
-  document.querySelectorAll(".crypto-li").forEach((v) => {
-    v.addEventListener("click", () => {
-      console.log("click");
+  document.querySelectorAll(".crypto-li").forEach((v, i) => {
+    v.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const newDropdownImage = document.createElement("image");
+      const newDropdownName = document.createElement("h3");
+
+      newDropdownImage.innerHTML = `
+      <img class="btc-img" src="${cryptoList[i].image.large}" alt="">
+      `;
+
+      newDropdownName.innerHTML = `
+      <h3>${cryptoList[i].symbol.toUpperCase()}</h3>
+      `;
+
+      dropdownCoin.replaceChild(newDropdownImage, dropdownCoin.children[0]);
+      dropdownCoin.replaceChild(newDropdownName, dropdownCoin.children[1]);
     });
   });
 });
