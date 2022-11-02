@@ -63,15 +63,16 @@ getCryptoList().then((response) => {
 });
 
 alertBtn.addEventListener("click", () => {
-  axios
-    .post("http://localhost:3000/", {
-      userEmail: emailInput.value,
-      selectedPrice: priceInput.value,
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  if (emailInput.value !== "" && priceInput.value !== "")
+    axios
+      .post("http://localhost:3000/", {
+        userEmail: emailInput.value,
+        selectedPrice: priceInput.value,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 });
