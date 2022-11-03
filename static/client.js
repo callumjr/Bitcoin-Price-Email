@@ -12,7 +12,6 @@ async function getCryptoList() {
     );
 
     const data = response.data;
-    console.log(data);
 
     return data;
   } catch (error) {
@@ -23,9 +22,9 @@ async function getCryptoList() {
 getCryptoList().then((response) => {
   const cryptoList = response;
 
-  cryptoList.forEach((v) => {
+  cryptoList.forEach((v, i) => {
     dropdownContentDiv.innerHTML += `
-      <li class="crypto-li">
+      <li id="${i}" class="crypto-li">
         <img src="${v.image.thumb}" alt="">
         <h3>${v.name}</h3>
         <h2>(${v.symbol.toUpperCase()})</h2>
@@ -45,6 +44,8 @@ getCryptoList().then((response) => {
     v.addEventListener("click", (e) => {
       e.preventDefault();
 
+      dropdownCoin.setAttribute("id", `${v.id}`);
+
       const newDropdownImage = document.createElement("image");
       const newDropdownName = document.createElement("h3");
 
@@ -63,11 +64,13 @@ getCryptoList().then((response) => {
 });
 
 alertBtn.addEventListener("click", () => {
+  console.log(Number(dropdownCoin.id));
   if (emailInput.value !== "" && priceInput.value !== "")
     axios
       .post("http://localhost:3000/", {
         userEmail: emailInput.value,
         selectedPrice: priceInput.value,
+        coin: Number(dropdownCoin.id),
       })
       .then(function (response) {
         console.log(response);
@@ -76,3 +79,8 @@ alertBtn.addEventListener("click", () => {
         console.log(error);
       });
 });
+
+//we need to save symbol name
+//then when we get coin array we need to search it for the symbol
+
+//more efficent way would be to keep the index of the array then when we get the coin data to search array by that index

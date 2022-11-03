@@ -8,8 +8,9 @@ app.use(express.static(__dirname + "/static"));
 app.post("/", express.json(), (req, res) => {
   const userEmail = req.body.userEmail;
   const selectedPrice = req.body.selectedPrice;
+  const coin = req.body.coin;
 
-  emailCode.emailFunction(selectedPrice, userEmail);
+  emailCode.emailFunction(selectedPrice, userEmail, coin);
 });
 
 app.listen(3000, () => {
