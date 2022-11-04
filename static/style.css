@@ -86,9 +86,10 @@ body {
   cursor: pointer;
 }
 .interactive-section .crypto-dropdown {
-  width: 7.6rem;
+  width: 5.5rem;
+  padding: 1rem;
   border-radius: 2px;
-  border: 1px solid #fff;
+  border: 1px solid rgb(255, 255, 255);
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
@@ -134,6 +135,28 @@ body {
 .interactive-section .crypto-dropdown-content .crypto-li > * {
   margin-right: 1rem;
   font-weight: 200;
+}
+.interactive-section .current-price-div {
+  display: flex;
+  position: relative;
+  margin-bottom: 0.85rem;
+  margin-left: 1.25rem;
+  align-items: center;
+}
+.interactive-section .current-price-div label {
+  font-size: 1rem;
+  margin-right: 0.7rem;
+  padding-top: 0.5rem;
+}
+.interactive-section .current-price-div p {
+  font-size: 1.25rem;
+  color: rgb(0, 149, 35);
+}
+
+.flex {
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
 }
 
 .email-input,

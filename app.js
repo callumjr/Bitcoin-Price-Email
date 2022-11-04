@@ -66,12 +66,3 @@ module.exports = {
   getPriceData,
   emailFunction,
 };
-
-//TO SEND EMAIL RUN EMAIL FUNCTION
-
-//check if email already sent you dont want to clutter inbox
-//send a weekly report of the price
-
-//PLAN
-//Use Email Input and Number Input
-//Set alert when user pushes button using email function

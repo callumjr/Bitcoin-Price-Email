@@ -3,6 +3,7 @@ const emailInput = document.querySelector(".email-input");
 const priceInput = document.querySelector(".price-input");
 const dropdownCoin = document.querySelector(".crypto-dropdown");
 const dropdownContentDiv = document.querySelector(".crypto-dropdown-content");
+const currentPriceDiv = document.querySelector(".current-price-div");
 
 async function getCryptoList() {
   try {
@@ -32,6 +33,10 @@ getCryptoList().then((response) => {
   `;
   });
 
+  currentPriceDiv.innerHTML += `
+    <p>${cryptoList[dropdownCoin.id].market_data.current_price.usd}</p>
+  `;
+
   dropdownCoin.addEventListener("click", () => {
     if (dropdownContentDiv.style.visibility !== "visible") {
       dropdownContentDiv.style.visibility = "visible";
@@ -59,6 +64,17 @@ getCryptoList().then((response) => {
 
       dropdownCoin.replaceChild(newDropdownImage, dropdownCoin.children[0]);
       dropdownCoin.replaceChild(newDropdownName, dropdownCoin.children[1]);
+
+      const newCurrentPrice = document.createElement("p");
+
+      newCurrentPrice.innerHTML = `
+        <p>${cryptoList[dropdownCoin.id].market_data.current_price.usd}</p>
+      `;
+
+      currentPriceDiv.replaceChild(
+        newCurrentPrice,
+        currentPriceDiv.children[1]
+      );
     });
   });
 });
@@ -79,8 +95,3 @@ alertBtn.addEventListener("click", () => {
         console.log(error);
       });
 });
-
-//we need to save symbol name
-//then when we get coin array we need to search it for the symbol
-
-//more efficent way would be to keep the index of the array then when we get the coin data to search array by that index
