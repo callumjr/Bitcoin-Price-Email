@@ -2,6 +2,7 @@ const alertBtn = document.querySelector(".alert-button");
 const emailInput = document.querySelector(".email-input");
 const priceInput = document.querySelector(".price-input");
 const dropdownCoin = document.querySelector(".crypto-dropdown");
+const coinName = dropdownCoin.querySelector(":scope > h3");
 const dropdownContentDiv = document.querySelector(".crypto-dropdown-content");
 const currentPriceDiv = document.querySelector(".current-price-div");
 
@@ -80,13 +81,13 @@ getCryptoList().then((response) => {
 });
 
 alertBtn.addEventListener("click", () => {
-  console.log(Number(dropdownCoin.id));
   if (emailInput.value !== "" && priceInput.value !== "")
     axios
       .post("http://localhost:3000/", {
-        userEmail: emailInput.value,
-        selectedPrice: priceInput.value,
-        coin: Number(dropdownCoin.id),
+        email: emailInput.value,
+        price: priceInput.value,
+        coin: coinName.innerHTML,
+        coinId: Number(dropdownCoin.id),
       })
       .then(function (response) {
         console.log(response);
