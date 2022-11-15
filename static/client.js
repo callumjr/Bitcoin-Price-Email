@@ -2,7 +2,6 @@ const alertBtn = document.querySelector(".alert-button");
 const emailInput = document.querySelector(".email-input");
 const priceInput = document.querySelector(".price-input");
 const dropdownCoin = document.querySelector(".crypto-dropdown");
-const coinName = dropdownCoin.querySelector(":scope > h3");
 const dropdownContentDiv = document.querySelector(".crypto-dropdown-content");
 const currentPriceDiv = document.querySelector(".current-price-div");
 
@@ -35,7 +34,9 @@ getCryptoList().then((response) => {
   });
 
   currentPriceDiv.innerHTML += `
-    <p>${cryptoList[dropdownCoin.id].market_data.current_price.usd}</p>
+    <p>${
+      cryptoList[dropdownCoin.id].market_data.current_price.usd
+    } <span>USD</span></p>
   `;
 
   dropdownCoin.addEventListener("click", () => {
@@ -60,7 +61,7 @@ getCryptoList().then((response) => {
       `;
 
       newDropdownName.innerHTML = `
-      <h3>${cryptoList[i].symbol.toUpperCase()}</h3>
+      <h3 class="coin-symbol">${cryptoList[i].symbol.toUpperCase()}</h3>
       `;
 
       dropdownCoin.replaceChild(newDropdownImage, dropdownCoin.children[0]);
@@ -69,7 +70,9 @@ getCryptoList().then((response) => {
       const newCurrentPrice = document.createElement("p");
 
       newCurrentPrice.innerHTML = `
-        <p>${cryptoList[dropdownCoin.id].market_data.current_price.usd}</p>
+        <p>${
+          cryptoList[dropdownCoin.id].market_data.current_price.usd
+        } <span>USD</span></p>
       `;
 
       currentPriceDiv.replaceChild(
@@ -81,13 +84,13 @@ getCryptoList().then((response) => {
 });
 
 alertBtn.addEventListener("click", () => {
+  coinName = document.querySelector(".coin-symbol").innerText;
   if (emailInput.value !== "" && priceInput.value !== "")
     axios
       .post("http://localhost:3000/", {
         email: emailInput.value,
         price: priceInput.value,
-        coin: coinName.innerHTML,
-        coinId: Number(dropdownCoin.id),
+        coin: coinName,
       })
       .then(function (response) {
         console.log(response);

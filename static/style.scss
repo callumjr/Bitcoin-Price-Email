@@ -166,6 +166,10 @@ body {
   margin-bottom: 0;
   display: flex;
   align-items: center;
+
+  span {
+    margin-left: 0.25rem;
+  }
 }
 
 .email-input,

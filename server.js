@@ -1,9 +1,10 @@
-const emailCode = require("./backend/app");
 const express = require("express");
 const mongoose = require("mongoose");
 const config = require("./backend/config");
-const controllers = require("./backend/controllers/recipient-controller");
-const createRecipient = controllers.createRecipient;
+const {
+  createRecipient,
+} = require("./backend/controllers/recipient-controller");
+const checkRecipientPrice = require("./backend/app");
 
 const app = express();
 
@@ -22,3 +23,9 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+//
+
+//we need to check data
+//search through database
+//check each one if price of coin is lower
+//if so email

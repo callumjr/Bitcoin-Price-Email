@@ -1,64 +1,29 @@
-const axios = require("axios");
-const nodemailer = require("nodemailer");
-const config = require("./config");
-const sendgridKey = config.MY_API_KEY;
-const senderEmail = config.SENDER_EMAIL;
+const { getPriceData, getCryptoList } = require("./api");
+const { getRecipients } = require("./controllers/recipient-controller");
+const emailFunction = require("./email");
 
-//get the price data from the coingecko api
+const checkRecipientPrice = () => {
+  getRecipients().then((res) => {
+    let recipients = res;
 
-async function getPriceData(n) {
-  try {
-    const response = await axios.get(
-      "https://api.coingecko.com/api/v3/coins/",
-      {}
-    );
+    getCryptoList().then((res) => {
+      let cryptoList = res;
+      recipients.forEach((v) => {
+        let coinObj = cryptoList.find((o) => o.symbol === v.coin.toLowerCase());
 
-    const data = response.data[n];
+        let coinCurrentPrice = coinObj.market_data.current_price.usd;
+        let coinName = coinObj.name;
 
-    return data;
-  } catch (error) {
-    throw error;
-  }
-}
+        if (coinCurrentPrice < v.price) {
+          let price = v.price;
+          let email = v.email;
+          let coin = v.coin;
 
-//use price data to send email using nodemailer
-
-const emailFunction = (price, recieverEmail, coinId) => {
-  getPriceData(coinId).then((response) => {
-    const coinPrice = response.market_data.current_price.usd;
-    const coinName = response.name;
-    const coinSymbol = response.symbol.toUpperCase();
-    const selectedPrice = price;
-
-    if (coinPrice < selectedPrice) {
-      const transport = nodemailer.createTransport({
-        host: "smtp.sendgrid.net",
-        port: 587,
-        auth: {
-          user: "apikey",
-          pass: sendgridKey,
-        },
-      });
-
-      const message = {
-        from: senderEmail,
-        to: recieverEmail,
-        subject: `${coinSymbol} PRICE BELOW ${selectedPrice}!`,
-        text: `${coinName} price is below your selected price of ${selectedPrice}, and is currently ${coinPrice}. This presents a good buying opportunity.`,
-      };
-
-      transport.sendMail(message, (err, info) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(info);
+          emailFunction(price, email, coin, coinName, coinCurrentPrice);
         }
       });
-    } else return;
+    });
   });
 };
 
-module.exports = {
-  getPriceData,
-  emailFunction,
-};
+module.exports = checkRecipientPrice;

@@ -15,10 +15,6 @@ const recipientSchema = new Schema(
       type: String,
       required: true,
     },
-    coinId: {
-      type: Number,
-      required: true,
-    },
   },
   { timestamps: true }
 );
