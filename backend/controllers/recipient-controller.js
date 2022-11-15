@@ -15,6 +15,7 @@ const createRecipient = async (req, res) => {
       email,
       price,
       coin,
+      emailedAt: 0,
     });
     res.status(200).json(recipient);
   } catch (err) {
@@ -22,7 +23,15 @@ const createRecipient = async (req, res) => {
   }
 };
 
+const updateRecipient = async (id, criteria) => {
+  const recipient = await Recipient.findOneAndUpdate(
+    { _id: id },
+    { emailedAt: criteria }
+  );
+};
+
 module.exports = {
   createRecipient,
   getRecipients,
+  updateRecipient,
 };

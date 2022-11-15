@@ -24,8 +24,3 @@ mongoose
     console.log(err);
   });
 //
-
-//we need to check data
-//search through database
-//check each one if price of coin is lower
-//if so email

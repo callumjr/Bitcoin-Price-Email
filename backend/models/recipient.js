@@ -15,6 +15,10 @@ const recipientSchema = new Schema(
       type: String,
       required: true,
     },
+    emailedAt: {
+      type: Number,
+      required: true,
+    },
   },
   { timestamps: true }
 );

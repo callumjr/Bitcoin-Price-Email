@@ -1,10 +1,15 @@
 const { getPriceData, getCryptoList } = require("./api");
-const { getRecipients } = require("./controllers/recipient-controller");
+const {
+  getRecipients,
+  updateRecipient,
+} = require("./controllers/recipient-controller");
 const emailFunction = require("./email");
 
 const checkRecipientPrice = () => {
   getRecipients().then((res) => {
-    let recipients = res;
+    let recipients = res.filter((n) => {
+      return n.emailedAt < Date.now() - 60 * 60 * 1000; //one hour
+    });
 
     getCryptoList().then((res) => {
       let cryptoList = res;
@@ -20,10 +25,12 @@ const checkRecipientPrice = () => {
           let coin = v.coin;
 
           emailFunction(price, email, coin, coinName, coinCurrentPrice);
+          updateRecipient(v._id, Date.now());
         }
       });
     });
   });
 };
+// then when searching filter for timestamps that are < than date.now() - 1 hour
 
 module.exports = checkRecipientPrice;
