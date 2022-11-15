@@ -1,6 +1,5 @@
 const axios = require("axios");
 const nodemailer = require("nodemailer");
-const express = require("express");
 const config = require("./config");
 const sendgridKey = config.MY_API_KEY;
 const senderEmail = config.SENDER_EMAIL;
@@ -24,12 +23,11 @@ async function getPriceData(n) {
 
 //use price data to send email using nodemailer
 
-const emailFunction = (price, recieverEmail, coin) => {
-  getPriceData(coin).then((response) => {
+const emailFunction = (price, recieverEmail, coinId) => {
+  getPriceData(coinId).then((response) => {
     const coinPrice = response.market_data.current_price.usd;
     const coinName = response.name;
     const coinSymbol = response.symbol.toUpperCase();
-    console.log(coinPrice);
     const selectedPrice = price;
 
     if (coinPrice < selectedPrice) {
@@ -56,9 +54,7 @@ const emailFunction = (price, recieverEmail, coin) => {
           console.log(info);
         }
       });
-    }
-
-    setTimeout(emailFunction, 60000);
+    } else return;
   });
 };
 

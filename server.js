@@ -1,8 +1,9 @@
-const emailCode = require("./app");
+const emailCode = require("./backend/app");
 const express = require("express");
 const mongoose = require("mongoose");
-const config = require("./config");
-const Recipient = require("./models/recipient");
+const config = require("./backend/config");
+const controllers = require("./backend/controllers/recipient-controller");
+const createRecipient = controllers.createRecipient;
 
 const app = express();
 
@@ -12,27 +13,12 @@ app.use(express.static(__dirname + "/static"));
 mongoose
   .connect(config.MONG_URI)
   .then(() => {
-    app.post("/", express.json(), async (req, res) => {
-      const { email, price, coin, coinId } = req.body;
-      try {
-        const recipient = await Recipient.create({
-          email,
-          price,
-          coin,
-          coinId,
-        });
-        res.status(200).json(recipient);
-      } catch (err) {
-        res.status(400).json({ error: err.message });
-      }
+    app.post("/", express.json(), createRecipient);
 
-      // emailCode.emailFunction(selectedPrice, userEmail, coin);
+    app.listen(3000, () => {
+      console.log("Server is up on port 3000.");
     });
   })
   .catch((err) => {
     console.log(err);
   });
-
-app.listen(3000, () => {
-  console.log("Server is up on port 3000.");
-});
