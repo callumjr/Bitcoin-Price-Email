@@ -24,3 +24,5 @@ mongoose
     console.log(err);
   });
 //
+
+checkRecipientPrice();

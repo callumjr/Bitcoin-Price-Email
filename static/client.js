@@ -98,4 +98,7 @@ alertBtn.addEventListener("click", () => {
       .catch(function (error) {
         console.log(error);
       });
+
+  emailInput.value = "";
+  priceInput.value = "";
 });

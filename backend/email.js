@@ -1,6 +1,5 @@
 const nodemailer = require("nodemailer");
 const config = require("./config");
-const { getPriceData } = require("./api");
 const sendgridKey = config.MY_API_KEY;
 const senderEmail = config.SENDER_EMAIL;
 

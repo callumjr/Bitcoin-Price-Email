@@ -1,5 +1,4 @@
 const Recipient = require("../models/recipient");
-const emailFunction = require("../email");
 
 //get all recipients
 const getRecipients = async () => {

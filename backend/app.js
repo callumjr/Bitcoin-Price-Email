@@ -1,4 +1,4 @@
-const { getPriceData, getCryptoList } = require("./api");
+const { getCryptoList } = require("./api");
 const {
   getRecipients,
   updateRecipient,
